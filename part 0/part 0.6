@@ -4,3 +4,5 @@ Sequence Diagram
   Participant server
 
   browser ->> server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+  note: the browser prevents default handing of the form. Renders the new note straigth in the browser rather then having it be sent first to server and requested back by GET.
