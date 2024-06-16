@@ -76,15 +76,4 @@ const App = () => {
   )
 }
 
-//const App = () => {
-
-//  return (
-//    <div>
-//      <Header />
-//      <Content />
-//      <Total />
-//    </div>
-//  )
-//}
-
 export default App
