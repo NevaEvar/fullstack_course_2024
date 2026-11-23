@@ -12,6 +12,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [actionMessage, setActionMessage] = useState(null)
+  const [actionType, setActionType] = useState('success')
 
   useEffect(() => {
       numberService
@@ -50,10 +51,21 @@ const App = () => {
       setNewName('')
       setNewNumber('')
       setActionMessage(`Number added: ${newName}`)
+      setActionType('success')
       setTimeout(() => {
         setActionMessage(null)
       }, 2000)
-          })
+      })
+      .catch(error => {
+        const errorMessage = error.response && error.response.data && error.response.data.error
+          ? error.response.data.error
+          : error.message
+        setActionMessage(errorMessage)
+        setActionType('error')
+        setTimeout(() => {
+          setActionMessage(null)
+        }, 2000)
+      })
   }
   
   const deleteNumber = (person) => {
@@ -84,7 +96,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={actionMessage} />
+      <Notification message={actionMessage} type={actionType} />
       <PersonForm 
         addNumber={addNumber}
         newName={newName}
